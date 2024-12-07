@@ -8,17 +8,24 @@ buttons.forEach(button => {
   button.addEventListener('click', () => {
     const value = button.getAttribute('data-value');
 
-    if (value === 'C') {
+    if (value === 'clear') { // Verifica o valor "clear"
       currentInput = '';
       previousInput = '';
       operator = '';
-      screen.value = ''; // Limpa a tela corretamente
+      screen.value = ''; // Limpa a tela
     } else if (value === '=') {
       if (currentInput && operator && previousInput) {
-        screen.value = eval(`${previousInput} ${operator} ${currentInput}`);
-        currentInput = screen.value;
-        operator = '';
-        previousInput = '';
+        try {
+          screen.value = eval(`${previousInput} ${operator} ${currentInput}`);
+          currentInput = screen.value;
+          operator = '';
+          previousInput = '';
+        } catch (error) {
+          screen.value = 'Erro';
+          currentInput = '';
+          operator = '';
+          previousInput = '';
+        }
       }
     } else if (['+', '-', '*', '/'].includes(value)) {
       if (currentInput) {
@@ -32,4 +39,3 @@ buttons.forEach(button => {
     }
   });
 });
-
