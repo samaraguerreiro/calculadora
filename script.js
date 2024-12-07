@@ -9,6 +9,7 @@ buttons.forEach(button => {
     const value = button.getAttribute('data-value');
 
     if (value === 'clear') { // Botão de limpar
+      console.log('Clear button clicked'); // Debugging line
       currentInput = '';
       previousInput = '';
       operator = '';
