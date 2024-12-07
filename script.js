@@ -8,12 +8,15 @@ buttons.forEach(button => {
   button.addEventListener('click', () => {
     const value = button.getAttribute('data-value');
 
-    if (value === 'clear') { // Verifica o valor "clear"
+    if (value === 'clear') { // Botão de limpar
       currentInput = '';
       previousInput = '';
       operator = '';
       screen.value = ''; // Limpa a tela
-    } else if (value === '=') {
+      return; // Finaliza o processamento do evento
+    }
+
+    if (value === '=') { // Botão de resultado
       if (currentInput && operator && previousInput) {
         try {
           screen.value = eval(`${previousInput} ${operator} ${currentInput}`);
@@ -27,15 +30,20 @@ buttons.forEach(button => {
           previousInput = '';
         }
       }
-    } else if (['+', '-', '*', '/'].includes(value)) {
+      return;
+    }
+
+    if (['+', '-', '*', '/'].includes(value)) { // Operadores
       if (currentInput) {
         operator = value;
         previousInput = currentInput;
         currentInput = '';
       }
-    } else {
-      currentInput += value;
-      screen.value = currentInput;
+      return;
     }
+
+    // Entrada de números e ponto
+    currentInput += value;
+    screen.value = currentInput;
   });
 });
