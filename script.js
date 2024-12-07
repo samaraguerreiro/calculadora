@@ -12,7 +12,7 @@ buttons.forEach(button => {
       currentInput = '';
       previousInput = '';
       operator = '';
-      screen.value = '';
+      screen.value = ''; // Limpa a tela corretamente
     } else if (value === '=') {
       if (currentInput && operator && previousInput) {
         screen.value = eval(`${previousInput} ${operator} ${currentInput}`);
@@ -32,3 +32,4 @@ buttons.forEach(button => {
     }
   });
 });
+
